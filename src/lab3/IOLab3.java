@@ -1,4 +1,4 @@
-package lab2;
+package lab3;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,15 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
 
 /**
- * This is a labe exercise designed to accept the input of any record number to
- * be read from the file.
+ * This program meets the Lab 3 assignment to read only the 2nd record and
+ * output only the city.
  *
  * @author Teresa Mahoney
  */
-public class IOLab2 {
+public class IOLab3 {
 
     public static void main(String[] args) throws IOException {
 
@@ -46,18 +45,31 @@ public class IOLab2 {
             } catch (Exception e) {
             }
         }
+        // get the second record
+        int spaceCount = 0;
+        char rChar;
+        String city = "";
+        String result = fileMap.get(1);
+        // got the record - System.out.println(result);
+        // char[] resultArr = result.toCharArray();
+        for (int j = 0; j < result.length(); j++) {
+            rChar = result.charAt(j);
+            // System.out.println(result.length());
+            if (rChar == ' ') {
+                spaceCount += 1;
+                
+                if (spaceCount == 5) {
+                   while (result.charAt(j) != ',') {
+                        j += 1;
+                        rChar = result.charAt(j);
+                        if(result.charAt(j) != ',')city += rChar;
+                        
+                    } 
+                    break;
+                }
 
-        inputStr = JOptionPane.showInputDialog("Enter the record number to display:");
-        i = Integer.parseInt(inputStr);
-        
-        // display the record
-        // check to make sure the record exists
-        String result = fileMap.get(i);
-        if(result==null){
-            System.out.println("An invalid record number was entered.");
-            
-        }else{
-        JOptionPane.showMessageDialog(null, fileMap.get(i));
+            }
         }
+        System.out.println(city);
     }// end Main
-}// end Class
+}// end class
